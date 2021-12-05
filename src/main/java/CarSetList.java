@@ -1,3 +1,5 @@
+import java.util.Iterator;
+
 public class CarSetList implements CarSet {
 
     private static final int INITIAL_CAPACITY = 16;
@@ -109,6 +111,39 @@ public class CarSetList implements CarSet {
 
     private int getElementPosition(Car car, int arrayLength) {
         return Math.abs(car.hashCode() % arrayLength);
+    }
+
+    @Override
+    public Iterator<Car> iterator() {
+        return new Iterator<Car>() {
+
+            int index = 0;
+            int arrayIndex = 0;
+            Entry entry;
+
+            @Override
+            public boolean hasNext() {
+                return index < size;
+            }
+
+            @Override
+            public Car next() {
+                while (array[arrayIndex] == null) {
+                    arrayIndex++;
+                }
+
+                if (entry == null) {
+                    entry = array[arrayIndex];
+                }
+                Car result = entry.value;
+                entry = entry.next;
+                if (entry == null) {
+                    arrayIndex++;
+                }
+                index++;
+                return result;
+            }
+        };
     }
 
     private static class Entry {
