@@ -18,20 +18,32 @@ public class CarArrayList implements CarList {
     }
 
     @Override
-    public void add(Car car) {
-        increaseArray();
-        carArrayList[size] = car;
-        size++;
+    public boolean contains(Car car) {
+        for (int i = 0; i < size; i++) {
+            if (carArrayList[i].equals(car)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     @Override
-    public void add(Car car, int index) {
+    public boolean add(Car car) {
+        increaseArray();
+        carArrayList[size] = car;
+        size++;
+        return true;
+    }
+
+    @Override
+    public boolean add(Car car, int index) {
         increaseArray();
         IntStream.iterate(size, i -> i < index, i -> i - 1).forEach(i -> {
             carArrayList[i] = carArrayList[i - 1];
             carArrayList[index] = car;
         });
         size++;
+        return true;
     }
 
     @Override

@@ -72,4 +72,12 @@ public class CarListTest {
         assertEquals("BMV", car.getBrand());
         assertEquals(101, carList.getSize());
     }
+
+    @Test
+    public void contains() {
+        Car existedCar = new Car("brand0", 0);
+        Car notExistedCar = new Car("brand1000", 1000);
+        assertTrue(carList.contains(existedCar));
+        assertFalse(carList.contains(notExistedCar));
+    }
 }

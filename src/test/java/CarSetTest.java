@@ -57,4 +57,12 @@ public class CarSetTest {
     public void size() {
         assertEquals(100, carSet.getSize());
     }
+
+    @Test
+    public void contains() {
+        Car existedCar = new Car("brand0", 0);
+        Car notExistedCar = new Car("brand1000", 1000);
+        assertTrue(carSet.contains(existedCar));
+        assertFalse(carSet.contains(notExistedCar));
+    }
 }

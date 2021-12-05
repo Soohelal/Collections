@@ -65,6 +65,26 @@ public class CarSetList implements CarSet {
     }
 
     @Override
+    public boolean contains(Car car) {
+        int position = getElementPosition(car, array.length);
+        if (array[position] == null) {
+            return false;
+        }
+        Entry secondLast = array[position];
+        Entry last = secondLast.next;
+        if (secondLast.value.equals(car)) {
+            return true;
+        }
+        while (last != null) {
+            if (last.value.equals(car)) {
+                return true;
+            }
+            last = last.next;
+        }
+        return false;
+    }
+
+    @Override
     public int getSize() {
         return size;
     }
